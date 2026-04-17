@@ -1,0 +1,1783 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>LIGHT. — The First Independent Youth Summit in Madinah</title>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800;900&family=Playfair+Display:wght@900&display=swap" rel="stylesheet"/>
+<script src="https://ucarecdn.com/libs/widget/3.x/uploadcare.full.min.js"></script>
+<script>UPLOADCARE_PUBLIC_KEY = 'c092abb75fd757441f77';</script>
+<script>UPLOADCARE_LOCALE = 'en';</script>
+<style>
+/* ── BRAND TOKENS ────────────────────────────────────────────── */
+:root {
+  --black:       #2a2a2a;
+  --white:       #ffffff;
+  --sky:         #7ec8f0;
+  --navy:        #2d4da0;
+  --lemon:       #f9e55a;
+  --gold:        #f5b700;
+  --pink-soft:   #ff85b3;
+  --pink-hot:    #ff2d8f;
+  --baby-blue:   #bde4f7;
+}
+
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+html { scroll-behavior: smooth; font-size: 16px; }
+
+body {
+  font-family: var(--font-main);
+  background: var(--white);
+  color: var(--black);
+  overflow-x: hidden;
+}
+
+/* ── INTRO ANIMATION ─────────────────────────────────────────── */
+#intro {
+  position: fixed;
+  inset: 0;
+  background: #333333;
+  z-index: 9999;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background 0.6s ease;
+}
+
+#intro-phase1 {
+  position: absolute;
+  text-align: center;
+  padding: 2rem;
+  opacity: 1;
+  transition: opacity 0.5s ease;
+}
+
+#intro-phase1 p {
+  font-family: 'Poppins', sans-serif;
+  font-size: clamp(1.2rem, 4vw, 2.2rem);
+  font-weight: 700;
+  color: #ffffff;
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  line-height: 1.4;
+}
+
+#intro-phase2 {
+  position: absolute;
+  text-align: center;
+  opacity: 0;
+  transition: opacity 0.5s ease;
+}
+
+#intro-logo-wrap {
+  filter: blur(20px);
+  transform: scale(0.9);
+  transition: filter 1s ease, transform 1s ease;
+}
+
+#intro-logo-wrap img {
+  height: clamp(8rem, 35vw, 22rem);
+  width: auto;
+  display: block;
+}
+
+#intro-logo-wrap.sharp {
+  filter: blur(0px);
+  transform: scale(1.05);
+}
+
+#intro-logo {
+  opacity: 0;
+  position: relative;
+  font-size: clamp(8rem, 35vw, 22rem);
+  font-weight: 900;
+  color: #ffffff;
+  letter-spacing: -0.04em;
+  line-height: 1;
+}
+
+#intro-logo.fly-to-nav {
+  position: fixed;
+  transition: all 0.75s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* ── MAIN SITE (hidden until intro done) ─────────────────────── */
+#site { opacity: 0; transition: opacity 0.5s ease; }
+#site.visible { opacity: 1; }
+
+/* ── NAVBAR ──────────────────────────────────────────────────── */
+#navbar {
+  position: fixed;
+  top: 0; left: 0; right: 0;
+  z-index: 1000;
+  background: var(--lemon);
+  border-bottom: 2px solid var(--black);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 2.5rem;
+  height: 96px;
+}
+
+#nav-logo {
+  font-size: 2.4rem;
+  font-weight: 900;
+  color: var(--black);
+  letter-spacing: -0.04em;
+  text-decoration: none;
+  line-height: 1;
+  opacity: 0;
+  position: relative;
+}
+
+#nav-logo img {
+  height: 4.5rem;
+  width: auto;
+  display: block;
+}
+
+#nav-logo.visible { opacity: 1; transition: opacity 0.3s ease; }
+
+nav {
+  display: flex;
+  align-items: center;
+  gap: 0.2rem;
+}
+
+nav a {
+  font-size: 0.8rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: var(--black);
+  text-decoration: none;
+  padding: 0.45rem 0.9rem;
+  border-radius: 100px;
+  transition: background 0.2s, color 0.2s;
+}
+
+nav a:hover { background: var(--black); color: var(--white); }
+
+nav a.apply-btn {
+  background: var(--pink-hot);
+  color: var(--white);
+  margin-left: 0.5rem;
+}
+
+nav a.apply-btn:hover { background: var(--black); }
+
+.hamburger {
+  display: none;
+  flex-direction: column;
+  gap: 5px;
+  cursor: pointer;
+  background: none;
+  border: none;
+  padding: 4px;
+}
+
+.hamburger span {
+  display: block;
+  width: 24px;
+  height: 2px;
+  background: var(--black);
+  transition: all 0.3s;
+}
+
+/* ── HERO ────────────────────────────────────────────────────── */
+#hero {
+  min-height: 100vh;
+  background: var(--lemon);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  overflow: hidden;
+  padding: 116px 2rem 4rem;
+}
+
+/* ── LOGO NAV DROPDOWN ───────────────────────────────────────── */
+#logo-dropdown {
+  position: absolute;
+  top: calc(100% + 12px);
+  left: 0;
+  background: var(--white);
+  border: 2px solid var(--black);
+  border-radius: 1.2rem;
+  overflow: hidden;
+  min-width: 200px;
+  display: none;
+  flex-direction: column;
+  z-index: 2000;
+  box-shadow: 4px 4px 0px var(--black);
+}
+
+#logo-dropdown.open { display: flex; }
+
+#logo-dropdown a {
+  font-size: 0.85rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: var(--black);
+  text-decoration: none;
+  padding: 0.9rem 1.4rem;
+  border-bottom: 1px solid rgba(0,0,0,0.08);
+  transition: background 0.15s, color 0.15s;
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+#logo-dropdown a:last-child { border-bottom: none; }
+
+#logo-dropdown a:hover {
+  background: var(--black);
+  color: var(--white);
+}
+
+#logo-dropdown a .dd-dot {
+  width: 8px; height: 8px;
+  border-radius: 50%;
+  flex-shrink: 0;
+}
+
+.hero-content {
+  position: relative;
+  z-index: 2;
+  text-align: center;
+  max-width: 900px;
+}
+
+.hero-tag {
+  display: inline-block;
+  background: var(--black);
+  color: var(--lemon);
+  font-size: 0.7rem;
+  font-weight: 700;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  padding: 0.4rem 1.2rem;
+  border-radius: 100px;
+  margin-bottom: 1.5rem;
+}
+
+.hero-title {
+  font-size: clamp(5rem, 18vw, 14rem);
+  font-weight: 900;
+  color: var(--black);
+  letter-spacing: -0.05em;
+  line-height: 0.9;
+  margin-bottom: 0.5rem;
+}
+
+.hero-title span { color: var(--pink-hot); }
+
+.hero-subtitle {
+  font-size: clamp(1rem, 3vw, 1.4rem);
+  font-weight: 400;
+  color: var(--black);
+  opacity: 0.75;
+  margin-bottom: 2.5rem;
+  line-height: 1.5;
+}
+
+.hero-date-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.8rem;
+  background: var(--white);
+  border: 2px solid var(--black);
+  border-radius: 100px;
+  padding: 0.7rem 1.8rem;
+  font-size: 1rem;
+  font-weight: 700;
+  margin-bottom: 2.5rem;
+}
+
+.hero-date-badge .dot {
+  width: 8px; height: 8px;
+  background: var(--pink-hot);
+  border-radius: 50%;
+  animation: pulse-dot 1.5s ease-in-out infinite;
+}
+
+@keyframes pulse-dot {
+  0%, 100% { transform: scale(1); opacity: 1; }
+  50% { transform: scale(1.5); opacity: 0.7; }
+}
+
+.hero-cta {
+  display: flex;
+  gap: 1rem;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+.btn {
+  display: inline-block;
+  font-family: var(--font-main);
+  font-size: 0.85rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  text-decoration: none;
+  padding: 0.9rem 2.2rem;
+  border-radius: 100px;
+  border: 2px solid var(--black);
+  transition: all 0.2s;
+  cursor: pointer;
+}
+
+.btn-primary {
+  background: var(--black);
+  color: var(--white);
+}
+
+.btn-primary:hover {
+  background: var(--pink-hot);
+  border-color: var(--pink-hot);
+}
+
+.btn-outline {
+  background: transparent;
+  color: var(--black);
+}
+
+.btn-outline:hover {
+  background: var(--black);
+  color: var(--white);
+}
+
+/* ── TICKER ──────────────────────────────────────────────────── */
+.ticker {
+  background: var(--pink-hot);
+  color: var(--white);
+  padding: 0.7rem 0;
+  overflow: hidden;
+  white-space: nowrap;
+  border-top: 2px solid var(--black);
+  border-bottom: 2px solid var(--black);
+}
+
+.ticker-inner {
+  display: inline-flex;
+  gap: 3rem;
+  animation: ticker 25s linear infinite;
+}
+
+.ticker-inner span {
+  font-size: 0.8rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.15em;
+}
+
+.ticker-inner .star { color: var(--lemon); font-size: 1rem; }
+
+@keyframes ticker {
+  0% { transform: translateX(0); }
+  100% { transform: translateX(-50%); }
+}
+
+/* ── SECTIONS ────────────────────────────────────────────────── */
+section { padding: 6rem 2rem; }
+
+.section-inner {
+  max-width: 1100px;
+  margin: 0 auto;
+}
+
+.section-label {
+  font-size: 0.7rem;
+  font-weight: 700;
+  letter-spacing: 0.25em;
+  text-transform: uppercase;
+  color: var(--pink-hot);
+  margin-bottom: 0.8rem;
+  display: block;
+}
+
+.section-title {
+  font-size: clamp(2rem, 5vw, 3.5rem);
+  font-weight: 900;
+  letter-spacing: -0.03em;
+  line-height: 1.05;
+  margin-bottom: 1.5rem;
+}
+
+/* ── ABOUT ───────────────────────────────────────────────────── */
+#about {
+  background: var(--white);
+  border-bottom: 2px solid var(--black);
+}
+
+.about-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 4rem;
+  align-items: center;
+}
+
+.about-text p {
+  font-size: 1.05rem;
+  line-height: 1.75;
+  color: var(--black);
+  opacity: 0.8;
+  margin-bottom: 1.2rem;
+}
+
+.about-stats {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1.5rem;
+}
+
+.stat-card {
+  background: var(--lemon);
+  border: 2px solid var(--black);
+  border-radius: 1.5rem;
+  padding: 2rem 1.5rem;
+  text-align: center;
+}
+
+.stat-card.pink { background: var(--pink-soft); }
+.stat-card.sky  { background: var(--sky); }
+.stat-card.gold { background: var(--gold); }
+
+.stat-num {
+  font-size: 3rem;
+  font-weight: 900;
+  letter-spacing: -0.04em;
+  line-height: 1;
+  display: block;
+}
+
+.stat-label {
+  font-size: 0.75rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  opacity: 0.7;
+  margin-top: 0.3rem;
+  display: block;
+}
+
+/* ── COMMITTEES ──────────────────────────────────────────────── */
+#committees {
+  background: var(--black);
+  color: var(--white);
+  border-bottom: 2px solid var(--black);
+}
+
+#committees .section-title { color: var(--white); }
+#committees .section-label { color: var(--lemon); }
+
+.committee-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  gap: 1.5rem;
+  margin-top: 3rem;
+}
+
+.committee-card {
+  border: 2px solid rgba(255,255,255,0.15);
+  border-radius: 1.5rem;
+  padding: 2rem;
+  transition: all 0.3s;
+  position: relative;
+  overflow: hidden;
+  cursor: default;
+}
+
+.committee-card::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  opacity: 0;
+  transition: opacity 0.3s;
+  border-radius: inherit;
+}
+
+.committee-card:nth-child(1)::before { background: var(--sky); }
+.committee-card:nth-child(2)::before { background: var(--lemon); }
+.committee-card:nth-child(3)::before { background: var(--pink-hot); }
+.committee-card:nth-child(4)::before { background: var(--gold); }
+.committee-card:nth-child(5)::before { background: var(--pink-soft); }
+.committee-card:nth-child(6)::before { background: var(--navy); }
+
+.committee-card:hover::before { opacity: 1; }
+.committee-card:hover { border-color: transparent; transform: translateY(-4px); }
+.committee-card:hover .comm-name,
+.committee-card:hover .comm-tag { color: var(--black); }
+.committee-card:nth-child(6):hover .comm-name,
+.committee-card:nth-child(6):hover .comm-tag { color: var(--white); }
+
+.committee-card > * { position: relative; z-index: 1; }
+
+.comm-num {
+  font-size: 0.7rem;
+  font-weight: 700;
+  letter-spacing: 0.2em;
+  opacity: 0.4;
+  margin-bottom: 0.8rem;
+}
+
+.comm-name {
+  font-size: 1.3rem;
+  font-weight: 800;
+  letter-spacing: -0.02em;
+  line-height: 1.2;
+  margin-bottom: 0.5rem;
+  transition: color 0.3s;
+}
+
+.comm-tag {
+  font-size: 0.7rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  opacity: 0.5;
+  transition: color 0.3s;
+}
+
+/* ── APPLY ───────────────────────────────────────────────────── */
+#apply {
+  background: var(--sky);
+  border-bottom: 2px solid var(--black);
+}
+
+.role-tabs {
+  display: flex;
+  gap: 0.5rem;
+  flex-wrap: wrap;
+  margin: 2rem 0 2.5rem;
+}
+
+.role-tab {
+  font-family: var(--font-main);
+  font-size: 0.8rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  padding: 0.6rem 1.4rem;
+  border-radius: 100px;
+  border: 2px solid var(--black);
+  background: transparent;
+  color: var(--black);
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.role-tab.active,
+.role-tab:hover {
+  background: var(--black);
+  color: var(--white);
+}
+
+.form-panel { display: none; }
+.form-panel.active { display: block; }
+
+.apply-form {
+  background: var(--white);
+  border: 2px solid var(--black);
+  border-radius: 2rem;
+  padding: 2.5rem;
+  max-width: 720px;
+}
+
+.form-row {
+  margin-bottom: 1.4rem;
+}
+
+.form-row label {
+  display: block;
+  font-size: 0.8rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  margin-bottom: 0.5rem;
+  color: var(--black);
+}
+
+.form-row label .req { color: var(--pink-hot); margin-left: 2px; }
+
+.form-row input,
+.form-row select,
+.form-row textarea {
+  width: 100%;
+  font-family: var(--font-main);
+  font-size: 0.95rem;
+  color: var(--black);
+  background: var(--white);
+  border: 2px solid var(--black);
+  border-radius: 0.75rem;
+  padding: 0.75rem 1rem;
+  outline: none;
+  transition: border-color 0.2s, box-shadow 0.2s;
+  appearance: none;
+}
+
+.form-row input:focus,
+.form-row select:focus,
+.form-row textarea:focus {
+  border-color: var(--pink-hot);
+  box-shadow: 0 0 0 3px rgba(255,45,143,0.12);
+}
+
+.form-row textarea { min-height: 100px; resize: vertical; }
+
+.rating-group {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  margin-bottom: 0.75rem;
+}
+
+.rating-group label {
+  flex: 1;
+  font-size: 0.85rem;
+  font-weight: 500;
+  text-transform: none;
+  letter-spacing: 0;
+  margin: 0;
+}
+
+.rating-group input[type="number"] {
+  width: 70px;
+  text-align: center;
+  flex-shrink: 0;
+}
+
+.checkbox-row {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.75rem;
+  margin-bottom: 0.75rem;
+}
+
+.checkbox-row input[type="checkbox"] {
+  width: 18px;
+  height: 18px;
+  flex-shrink: 0;
+  margin-top: 2px;
+  accent-color: var(--pink-hot);
+  border: 2px solid var(--black);
+  border-radius: 4px;
+}
+
+.checkbox-row label {
+  font-size: 0.9rem;
+  font-weight: 500;
+  text-transform: none;
+  letter-spacing: 0;
+  margin: 0;
+  line-height: 1.4;
+}
+
+/* ── YES / NO PILL BUTTONS ───────────────────────────────────── */
+.yn-group {
+  display: flex;
+  gap: 0.75rem;
+  margin-top: 0.4rem;
+}
+
+.yn-option {
+  position: relative;
+}
+
+.yn-option input[type="radio"] {
+  position: absolute;
+  opacity: 0;
+  width: 0;
+  height: 0;
+}
+
+.yn-option label {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 80px;
+  padding: 0.6rem 1rem;
+  border: 2px solid var(--black);
+  border-radius: 100px;
+  font-size: 0.85rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  cursor: pointer;
+  transition: all 0.15s;
+  background: var(--white);
+  user-select: none;
+}
+
+.yn-option label:hover { background: var(--lemon); }
+
+.yn-option.yes input[type="radio"]:checked + label {
+  background: #22c55e;
+  border-color: #22c55e;
+  color: var(--white);
+}
+
+.yn-option.no input[type="radio"]:checked + label {
+  background: var(--pink-hot);
+  border-color: var(--pink-hot);
+  color: var(--white);
+}
+
+.committee-checkboxes {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 0.6rem;
+  margin-top: 0.4rem;
+}
+
+.comm-option {
+  position: relative;
+}
+
+.comm-option input[type="checkbox"] {
+  position: absolute;
+  opacity: 0;
+  width: 0;
+  height: 0;
+}
+
+.comm-option label {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding: 0.75rem 1rem;
+  border: 2px solid var(--black);
+  border-radius: 0.75rem;
+  font-size: 0.82rem;
+  font-weight: 600;
+  text-transform: none;
+  letter-spacing: 0;
+  cursor: pointer;
+  transition: all 0.15s;
+  background: var(--white);
+  user-select: none;
+  line-height: 1.3;
+  min-height: 56px;
+}
+
+.comm-option input[type="checkbox"]:checked + label {
+  background: var(--black);
+  color: var(--white);
+  border-color: var(--black);
+}
+
+.comm-option input[type="checkbox"]:disabled + label {
+  opacity: 0.35;
+  cursor: not-allowed;
+}
+
+.comm-option label:hover {
+  background: var(--lemon);
+  border-color: var(--black);
+}
+
+.form-submit {
+  background: var(--pink-hot);
+  color: var(--white);
+  border: 2px solid var(--pink-hot);
+  font-size: 0.9rem;
+  padding: 0.9rem 2.5rem;
+  border-radius: 100px;
+  font-family: var(--font-main);
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  cursor: pointer;
+  transition: all 0.2s;
+  margin-top: 0.5rem;
+}
+
+.form-submit:hover { background: var(--black); border-color: var(--black); }
+.form-submit:disabled { opacity: 0.5; cursor: not-allowed; }
+
+.form-msg {
+  margin-top: 1rem;
+  font-size: 0.9rem;
+  font-weight: 600;
+  display: none;
+  padding: 0.75rem 1rem;
+  border-radius: 0.75rem;
+  border: 2px solid;
+}
+
+.form-msg.success {
+  color: #065f46;
+  background: #d1fae5;
+  border-color: #34d399;
+}
+
+.form-msg.error {
+  color: #991b1b;
+  background: #fee2e2;
+  border-color: #f87171;
+}
+
+/* ── CONTACT ─────────────────────────────────────────────────── */
+#contact {
+  background: var(--lemon);
+  border-bottom: 2px solid var(--black);
+}
+
+.contact-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 4rem;
+  align-items: start;
+}
+
+.contact-info p {
+  font-size: 1rem;
+  line-height: 1.7;
+  opacity: 0.8;
+  margin-bottom: 2rem;
+}
+
+.contact-links {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+.contact-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.75rem;
+  font-size: 0.9rem;
+  font-weight: 600;
+  color: var(--black);
+  text-decoration: none;
+  padding: 0.8rem 1.2rem;
+  border: 2px solid var(--black);
+  border-radius: 0.75rem;
+  background: var(--white);
+  transition: all 0.2s;
+  width: fit-content;
+}
+
+.contact-link:hover {
+  background: var(--black);
+  color: var(--white);
+}
+
+.contact-link svg { width: 18px; height: 18px; flex-shrink: 0; }
+
+/* ── FOOTER ──────────────────────────────────────────────────── */
+footer {
+  background: var(--black);
+  color: var(--white);
+  padding: 2rem 2.5rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  flex-wrap: wrap;
+}
+
+.footer-logo {
+  font-size: 1.5rem;
+  font-weight: 900;
+  letter-spacing: -0.04em;
+  color: var(--white);
+}
+
+.footer-logo img { height: 1.8rem; width: auto; display: block; }
+
+footer p {
+  font-size: 0.75rem;
+  opacity: 0.45;
+  font-weight: 400;
+}
+
+/* ── DECORATIVE PATTERN ELEMENTS ─────────────────────────────── */
+.asterisk {
+  display: inline-block;
+  font-size: 1.5rem;
+  color: var(--pink-hot);
+  line-height: 1;
+  margin: 0 0.3rem;
+}
+
+/* ── NAV LOGO CYCLE BUTTON ───────────────────────────────────── */
+#nav-logo {
+  position: relative;
+  cursor: pointer;
+}
+
+/* ── SCROLL REVEAL ───────────────────────────────────────────── */
+.reveal {
+  opacity: 0;
+  transform: translateY(30px);
+  transition: opacity 0.7s ease, transform 0.7s ease;
+}
+
+.reveal.in { opacity: 1; transform: none; }
+
+/* ── MOBILE NAV ──────────────────────────────────────────────── */
+@media (max-width: 768px) {
+  .hamburger { display: flex; }
+
+  nav#main-nav {
+    display: none;
+    position: fixed;
+    inset: 96px 0 0;
+    background: var(--lemon);
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 1.5rem;
+    z-index: 999;
+  }
+
+  nav#main-nav.open { display: flex; }
+  nav#main-nav a { font-size: 1.2rem; padding: 0.6rem 2rem; }
+
+  .about-grid { grid-template-columns: 1fr; }
+  .contact-grid { grid-template-columns: 1fr; gap: 2rem; }
+  .committee-checkboxes { grid-template-columns: 1fr; }
+  footer { flex-direction: column; text-align: center; }
+}
+
+/* ── SUCCESS OVERLAY ─────────────────────────────────────────── */
+.success-overlay {
+  display: none;
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,0.6);
+  z-index: 5000;
+  align-items: center;
+  justify-content: center;
+}
+
+.success-overlay.show { display: flex; }
+
+.success-box {
+  background: var(--white);
+  border: 3px solid var(--black);
+  border-radius: 2rem;
+  padding: 3rem 2.5rem;
+  max-width: 420px;
+  width: 90%;
+  text-align: center;
+}
+
+.success-box .big-check {
+  font-size: 3rem;
+  margin-bottom: 1rem;
+}
+
+.success-box h3 {
+  font-size: 1.5rem;
+  font-weight: 900;
+  margin-bottom: 0.75rem;
+}
+
+.success-box p {
+  font-size: 0.95rem;
+  line-height: 1.6;
+  opacity: 0.7;
+  margin-bottom: 1.5rem;
+}
+
+.success-box button {
+  font-family: var(--font-main);
+  background: var(--black);
+  color: var(--white);
+  border: none;
+  border-radius: 100px;
+  padding: 0.7rem 2rem;
+  font-size: 0.85rem;
+  font-weight: 700;
+  cursor: pointer;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+}
+</style>
+</head>
+<body>
+
+<!-- ══ INTRO ANIMATION ══════════════════════════════════════════ -->
+<div id="intro">
+  <div id="intro-phase1">
+    <p>WHY STAY IN THE DARK<br>WHEN YOU CAN COME TO....</p>
+  </div>
+  <div id="intro-phase2">
+    <div id="intro-logo-wrap">
+      <img src="logo.png" alt="LIGHT." onerror="this.style.display='none'; this.parentNode.innerHTML='<span style=\'font-family:Georgia,serif;color:#fff;font-size:clamp(8rem,35vw,22rem);font-weight:900;letter-spacing:-0.04em;\'>LIGHT.</span>'"/>
+    </div>
+  </div>
+  <div id="intro-logo" style="display:none;"></div>
+</div>
+
+<!-- ══ SUCCESS OVERLAY ════════════════════════════════════════════ -->
+<div class="success-overlay" id="successOverlay">
+  <div class="success-box">
+    <div class="big-check">🌟</div>
+    <h3>You're in the queue!</h3>
+    <p>Your application has been received. We'll be in touch soon — get ready for something special.</p>
+    <button onclick="document.getElementById('successOverlay').classList.remove('show')">Close</button>
+  </div>
+</div>
+
+<!-- ══ SITE (shown after intro) ══════════════════════════════════ -->
+<div id="site">
+
+  <!-- NAVBAR -->
+  <header id="navbar">
+    <div style="position:relative;">
+      <a href="#hero" id="nav-logo" title="Go to section" onclick="toggleDropdown(event)">
+        <img src="logo.png" alt="LIGHT." onerror="this.style.display='none'; this.parentNode.innerHTML='LIGHT.'"/>
+      </a>
+      <div id="logo-dropdown">
+        <a href="#hero" onclick="closeDropdown()"><span class="dd-dot" style="background:var(--lemon);border:1.5px solid var(--black);"></span>Home</a>
+        <a href="#about" onclick="closeDropdown()"><span class="dd-dot" style="background:var(--sky);"></span>About</a>
+        <a href="#committees" onclick="closeDropdown()"><span class="dd-dot" style="background:var(--navy);"></span>Committees</a>
+        <a href="#apply" onclick="closeDropdown()"><span class="dd-dot" style="background:var(--pink-hot);"></span>Apply Now</a>
+        <a href="#fees" onclick="closeDropdown()"><span class="dd-dot" style="background:var(--lemon);border:1.5px solid var(--black);"></span>Fees</a>
+        <a href="#contact" onclick="closeDropdown()"><span class="dd-dot" style="background:var(--gold);"></span>Contact</a>
+      </div>
+    </div>
+    <button class="hamburger" onclick="document.getElementById('main-nav').classList.toggle('open')" aria-label="Menu">
+      <span></span><span></span><span></span>
+    </button>
+    <nav id="main-nav">
+      <a href="#about">About</a>
+      <a href="#committees">Committees</a>
+      <a href="#apply" class="apply-btn">Apply Now</a>
+    </nav>
+  </header>
+
+  <!-- HERO -->
+  <section id="hero">
+    <div class="hero-content">
+      <span class="hero-tag">✦ Madinah, Saudi Arabia ✦</span>
+      <h1 class="hero-title">
+        <img src="logo.png" alt="LIGHT." style="height:clamp(8rem,28vw,22rem);width:auto;display:block;margin:0 auto;" onerror="this.style.display='none'; this.insertAdjacentHTML('afterend','LIGHT<span>.</span>')"/>
+      </h1>
+      <p class="hero-subtitle">The first independent youth summit in Madinah</p>
+      <div class="hero-date-badge">
+        <span class="dot"></span>
+        22 — 23 May 2026
+      </div>
+      <div class="hero-cta">
+        <a href="#apply" class="btn btn-primary">Apply Now</a>
+        <a href="#about" class="btn btn-outline">Learn More</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- TICKER -->
+  <div class="ticker">
+    <div class="ticker-inner" id="ticker">
+      <span class="star">✦</span><span>Madinah 2026</span>
+      <span class="star">✦</span><span>22–23 May</span>
+      <span class="star">✦</span><span>Light Summit</span>
+      <span class="star">✦</span><span>Youth &amp; Dialogue</span>
+      <span class="star">✦</span><span>6 Committees</span>
+      <span class="star">✦</span><span>First of its kind</span>
+      <span class="star">✦</span><span>Madinah 2026</span>
+      <span class="star">✦</span><span>22–23 May</span>
+      <span class="star">✦</span><span>Light Summit</span>
+      <span class="star">✦</span><span>Youth &amp; Dialogue</span>
+      <span class="star">✦</span><span>6 Committees</span>
+      <span class="star">✦</span><span>First of its kind</span>
+    </div>
+  </div>
+
+  <!-- ABOUT -->
+  <section id="about">
+    <div class="section-inner">
+      <div class="about-grid">
+        <div class="about-text reveal">
+          <span class="section-label">About Light</span>
+          <h2 class="section-title">Where voices meet the stage.</h2>
+          <p>Light is Madinah's first ever independent youth summit — a two-day experience built around dialogue, leadership, and real debate. We believe in giving young people a space that's entirely theirs.</p>
+          <p>Across six distinct committees, delegates tackle global issues with the energy and urgency they deserve. No scripts. No ceiling. Just ideas.</p>
+          <a href="#apply" class="btn btn-primary" style="margin-top:0.5rem;">Join the Summit</a>
+        </div>
+        <div class="about-stats reveal">
+          <div class="stat-card">
+            <span class="stat-num">2</span>
+            <span class="stat-label">Days of debate</span>
+          </div>
+          <div class="stat-card pink">
+            <span class="stat-num">6</span>
+            <span class="stat-label">Committees</span>
+          </div>
+          <div class="stat-card sky">
+            <span class="stat-num">4</span>
+            <span class="stat-label">Roles to apply</span>
+          </div>
+          <div class="stat-card gold">
+            <span class="stat-num">'26</span>
+            <span class="stat-label">Inaugural year</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- COMMITTEES -->
+  <section id="committees">
+    <div class="section-inner">
+      <span class="section-label reveal">Committees</span>
+      <h2 class="section-title reveal">Six arenas.<br>One summit.</h2>
+      <div class="committee-grid">
+        <div class="committee-card reveal">
+          <p class="comm-num">01</p>
+          <h3 class="comm-name">Refugee Agency</h3>
+          <p class="comm-tag">Humanitarian Affairs</p>
+        </div>
+        <div class="committee-card reveal">
+          <p class="comm-num">02</p>
+          <h3 class="comm-name">Global Financial Council</h3>
+          <p class="comm-tag">Economics & Trade</p>
+        </div>
+        <div class="committee-card reveal">
+          <p class="comm-num">03</p>
+          <h3 class="comm-name">International Security Forum</h3>
+          <p class="comm-tag">Peace & Security</p>
+        </div>
+        <div class="committee-card reveal">
+          <p class="comm-num">04</p>
+          <h3 class="comm-name">Radiant Health Committee</h3>
+          <p class="comm-tag">Global Health</p>
+        </div>
+        <div class="committee-card reveal">
+          <p class="comm-num">05</p>
+          <h3 class="comm-name">JusTech Council</h3>
+          <p class="comm-tag">Technology & Justice</p>
+        </div>
+        <div class="committee-card reveal">
+          <p class="comm-num">06</p>
+          <h3 class="comm-name">Space Development Forum</h3>
+          <p class="comm-tag">Science & Innovation</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- APPLY -->
+  <section id="apply">
+    <div class="section-inner">
+      <span class="section-label">Applications</span>
+      <h2 class="section-title">Find your role.</h2>
+      <p style="opacity:0.75; margin-bottom:1.5rem; max-width:540px; line-height:1.7;">Pick your path below and fill out your application. Every role matters. Every voice counts.</p>
+
+      <div class="role-tabs">
+        <button class="role-tab active" onclick="switchTab('delegate', this)">Delegate</button>
+        <button class="role-tab" onclick="switchTab('chair', this)">Chair</button>
+        <button class="role-tab" onclick="switchTab('media', this)">Media</button>
+        <button class="role-tab" onclick="switchTab('volunteer', this)">Admin</button>
+      </div>
+
+      <!-- DELEGATE FORM -->
+      <div class="form-panel active" id="panel-delegate">
+        <form class="apply-form" onsubmit="submitForm(event,'delegate')">
+          <div class="form-row" style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:1rem;">
+            <div>
+              <label for="d_fname">First Name <span class="req">*</span></label>
+              <input id="d_fname" type="text" name="first_name" required placeholder="First name"/>
+            </div>
+            <div>
+              <label for="d_mname">Middle Name</label>
+              <input id="d_mname" type="text" name="middle_name" placeholder="Middle name"/>
+            </div>
+            <div>
+              <label for="d_lname">Last Name <span class="req">*</span></label>
+              <input id="d_lname" type="text" name="last_name" required placeholder="Last name"/>
+            </div>
+          </div>
+          <div class="form-row">
+            <label for="d_email">Email Address <span class="req">*</span></label>
+            <input id="d_email" type="email" name="email" required placeholder="your@email.com"/>
+          </div>
+          <div class="form-row">
+            <label for="d_phone">Phone Number <span class="req">*</span></label>
+            <input id="d_phone" type="tel" name="phone" required placeholder="+966 5xxxxxxxx"/>
+          </div>
+          <div class="form-row">
+            <label>Have you participated in a conference before? <span class="req">*</span></label>
+            <div class="yn-group">
+              <div class="yn-option yes">
+                <input type="radio" name="d_prior_yn" id="d_prior_yes" value="Yes" onchange="togglePrior('delegate', true)" required/>
+                <label for="d_prior_yes">Yes</label>
+              </div>
+              <div class="yn-option no">
+                <input type="radio" name="d_prior_yn" id="d_prior_no" value="No" onchange="togglePrior('delegate', false)"/>
+                <label for="d_prior_no">No</label>
+              </div>
+            </div>
+          </div>
+          <div id="d_prior_block" style="display:none;">
+            <div class="form-row">
+              <label for="d_experience">Describe your experience (min. 25 words) <span class="req">*</span></label>
+              <textarea id="d_experience" name="experience" placeholder="Conference name, your role, what you took away from it..."></textarea>
+            </div>
+            <div class="form-row">
+              <label for="d_proof">Upload proof of participation <span class="req">*</span></label>
+              <p style="font-size:0.78rem;opacity:0.6;margin-bottom:0.4rem;">Photos, certificates, screenshots — you can select multiple files.</p>
+              <input type="hidden" id="d_proof_url" name="proof_link"/><input id="d_proof" type="hidden" role="uploadcare-uploader" data-multiple="true" data-images-only="false"/><div id="d_proof_preview" style="margin-top:0.4rem;font-size:0.8rem;color:var(--pink-hot);font-weight:600;"></div>
+            </div>
+          </div>
+
+          <div class="form-row">
+            <label for="d_strengths">Your top three qualities in debate & convincing <span class="req">*</span></label>
+            <textarea id="d_strengths" name="debate_strengths" required placeholder="1. ... 2. ... 3. ..."></textarea>
+          </div>
+
+          <div class="form-row">
+            <label>Committee preferences <span class="req">*</span> — select up to 3</label>
+            <div class="committee-checkboxes" id="d_committees">
+              <div class="comm-option"><input type="checkbox" id="dc1" name="committees" value="Refugee Agency" onchange="limitChecks('d_committees',3)"/><label for="dc1">Refugee Agency</label></div>
+              <div class="comm-option"><input type="checkbox" id="dc2" name="committees" value="Global Financial Council" onchange="limitChecks('d_committees',3)"/><label for="dc2">Global Financial Council</label></div>
+              <div class="comm-option"><input type="checkbox" id="dc3" name="committees" value="International Security Forum" onchange="limitChecks('d_committees',3)"/><label for="dc3">International Security Forum</label></div>
+              <div class="comm-option"><input type="checkbox" id="dc4" name="committees" value="Radiant Health Committee" onchange="limitChecks('d_committees',3)"/><label for="dc4">Radiant Health Committee</label></div>
+              <div class="comm-option"><input type="checkbox" id="dc5" name="committees" value="JusTech Council" onchange="limitChecks('d_committees',3)"/><label for="dc5">JusTech Council</label></div>
+              <div class="comm-option"><input type="checkbox" id="dc6" name="committees" value="Space Development Forum" onchange="limitChecks('d_committees',3)"/><label for="dc6">Space Development Forum</label></div>
+            </div>
+            <p id="d_committees_warn" style="display:none;color:var(--pink-hot);font-size:0.78rem;font-weight:600;margin-top:0.4rem;">Max 3 committees selected.</p>
+          </div>
+
+          <div class="form-row">
+            <label for="d_comm_reason">Why those committees? <span class="req">*</span></label>
+            <textarea id="d_comm_reason" name="committee_reason" required placeholder="Tell us your reasons..."></textarea>
+          </div>
+          <div class="form-row">
+            <label for="d_confidence">Confidence leading in debate (1–10) <span class="req">*</span></label>
+            <input id="d_confidence" type="number" name="confidence" min="1" max="10" required placeholder="7"/>
+          </div>
+          <button type="submit" class="form-submit">Submit Application</button>
+          <div class="form-msg" id="msg-delegate"></div>
+        </form>
+      </div>
+
+      <!-- CHAIR FORM -->
+      <div class="form-panel" id="panel-chair">
+        <form class="apply-form" onsubmit="submitForm(event,'chair')">
+          <div class="form-row" style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:1rem;">
+            <div>
+              <label for="c_fname">First Name <span class="req">*</span></label>
+              <input id="c_fname" type="text" name="first_name" required placeholder="First name"/>
+            </div>
+            <div>
+              <label for="c_mname">Middle Name</label>
+              <input id="c_mname" type="text" name="middle_name" placeholder="Middle name"/>
+            </div>
+            <div>
+              <label for="c_lname">Last Name <span class="req">*</span></label>
+              <input id="c_lname" type="text" name="last_name" required placeholder="Last name"/>
+            </div>
+          </div>
+          <div class="form-row">
+            <label for="c_email">Email Address <span class="req">*</span></label>
+            <input id="c_email" type="email" name="email" required placeholder="your@email.com"/>
+          </div>
+          <div class="form-row">
+            <label for="c_phone">Phone Number <span class="req">*</span></label>
+            <input id="c_phone" type="tel" name="phone" required placeholder="+966 5xxxxxxxx"/>
+          </div>
+          <div class="form-row">
+            <label>Have you participated in a conference before? <span class="req">*</span></label>
+            <div class="yn-group">
+              <div class="yn-option yes">
+                <input type="radio" name="c_prior_yn" id="c_prior_yes" value="Yes" onchange="togglePrior('chair', true)" required/>
+                <label for="c_prior_yes">Yes</label>
+              </div>
+              <div class="yn-option no">
+                <input type="radio" name="c_prior_yn" id="c_prior_no" value="No" onchange="togglePrior('chair', false)"/>
+                <label for="c_prior_no">No</label>
+              </div>
+            </div>
+          </div>
+          <div id="c_prior_block" style="display:none;">
+            <div class="form-row">
+              <label for="c_experience">List your conference experiences — all roles <span class="req">*</span></label>
+              <textarea id="c_experience" name="experiences" placeholder="Conference name, your role, and year..."></textarea>
+            </div>
+            <div class="form-row">
+              <label for="c_proof">Upload proof of participation <span class="req">*</span></label>
+              <p style="font-size:0.78rem;opacity:0.6;margin-bottom:0.4rem;">Photos, certificates, screenshots — you can select multiple files.</p>
+              <input type="hidden" id="c_proof_url" name="proof_link"/><input id="c_proof" type="hidden" role="uploadcare-uploader" data-multiple="true" data-images-only="false"/><div id="c_proof_preview" style="margin-top:0.4rem;font-size:0.8rem;color:var(--pink-hot);font-weight:600;"></div>
+            </div>
+          </div>
+          <div class="form-row">
+            <label for="c_role">What do you think a chair's role is? (min. 35 words) <span class="req">*</span></label>
+            <textarea id="c_role" name="chair_role" required placeholder="In your own words..."></textarea>
+          </div>
+          <div class="form-row">
+            <label for="c_beginner">How would you lead a beginner committee? (min. 40 words) <span class="req">*</span></label>
+            <textarea id="c_beginner" name="beginner_lead" required placeholder="How would you handle it?"></textarea>
+          </div>
+          <div class="form-row">
+            <label for="c_words">Describe yourself as a leader in three words (as others would say) <span class="req">*</span></label>
+            <input id="c_words" type="text" name="leader_words" required placeholder="e.g. calm, decisive, fair"/>
+          </div>
+          <div class="form-row">
+            <label for="c_conf">Confidence in conference procedure (1–10) <span class="req">*</span></label>
+            <input id="c_conf" type="number" name="procedure_confidence" min="1" max="10" required placeholder="8"/>
+            <p style="font-size:0.78rem;margin-top:0.4rem;opacity:0.6;">Note: You may or may not be tested.</p>
+          </div>
+          <button type="submit" class="form-submit">Submit Application</button>
+          <div class="form-msg" id="msg-chair"></div>
+        </form>
+      </div>
+
+      <!-- MEDIA FORM -->
+      <div class="form-panel" id="panel-media">
+        <form class="apply-form" onsubmit="submitForm(event,'media')">
+          <div class="form-row" style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:1rem;">
+            <div>
+              <label for="m_fname">First Name <span class="req">*</span></label>
+              <input id="m_fname" type="text" name="first_name" required placeholder="First name"/>
+            </div>
+            <div>
+              <label for="m_mname">Middle Name</label>
+              <input id="m_mname" type="text" name="middle_name" placeholder="Middle name"/>
+            </div>
+            <div>
+              <label for="m_lname">Last Name <span class="req">*</span></label>
+              <input id="m_lname" type="text" name="last_name" required placeholder="Last name"/>
+            </div>
+          </div>
+          <div class="form-row">
+            <label for="m_email">Email Address <span class="req">*</span></label>
+            <input id="m_email" type="email" name="email" required placeholder="your@email.com"/>
+          </div>
+          <div class="form-row">
+            <label for="m_phone">Phone Number <span class="req">*</span></label>
+            <input id="m_phone" type="tel" name="phone" required placeholder="+966 5xxxxxxxx"/>
+          </div>
+          <div class="form-row">
+            <label>Have you participated in a conference or event before? <span class="req">*</span></label>
+            <div class="yn-group">
+              <div class="yn-option yes">
+                <input type="radio" name="m_prior_yn" id="m_prior_yes" value="Yes" onchange="togglePrior('media', true)" required/>
+                <label for="m_prior_yes">Yes</label>
+              </div>
+              <div class="yn-option no">
+                <input type="radio" name="m_prior_yn" id="m_prior_no" value="No" onchange="togglePrior('media', false)"/>
+                <label for="m_prior_no">No</label>
+              </div>
+            </div>
+          </div>
+          <div id="m_prior_block" style="display:none;">
+            <div class="form-row">
+              <label for="m_experience">Describe that experience <span class="req">*</span></label>
+              <textarea id="m_experience" name="prior_experience" placeholder="Event name, your role, what you captured..."></textarea>
+            </div>
+            <div class="form-row">
+              <label for="m_proof">Upload proof of participation <span class="req">*</span></label>
+              <p style="font-size:0.78rem;opacity:0.6;margin-bottom:0.4rem;">Photos, certificates, screenshots — you can select multiple files.</p>
+              <input type="hidden" id="m_proof_url" name="proof_link"/><input id="m_proof" type="hidden" role="uploadcare-uploader" data-multiple="true" data-images-only="false"/><div id="m_proof_preview" style="margin-top:0.4rem;font-size:0.8rem;color:var(--pink-hot);font-weight:600;"></div>
+            </div>
+          </div>
+          <div class="form-row">
+            <label for="m_photo_exp">Describe your past photography/videography experience <span class="req">*</span></label>
+            <textarea id="m_photo_exp" name="photo_exp" required placeholder="Projects, events, personal work..."></textarea>
+          </div>
+          <div class="form-row">
+            <label for="m_contrib">What would you bring to the media team? <span class="req">*</span></label>
+            <textarea id="m_contrib" name="contribution" required placeholder="Your unique value add..."></textarea>
+          </div>
+          <div class="form-row">
+            <label for="m_skills">What creative skills do you have? <span class="req">*</span></label>
+            <textarea id="m_skills" name="creative_skills" required placeholder="Photo editing, graphic design, videography, etc."></textarea>
+          </div>
+          <div class="form-row">
+            <label for="m_type">Will you be taking photos or videos? <span class="req">*</span></label>
+            <select id="m_type" name="media_type" required>
+              <option value="">Select one</option>
+              <option>Photos only</option>
+              <option>Videos only</option>
+              <option>Both photos and videos</option>
+            </select>
+          </div>
+          <div class="form-row">
+            <label for="m_camera">Camera / phone model you'll be using <span class="req">*</span></label>
+            <input id="m_camera" type="text" name="camera" required placeholder="e.g. iPhone 15 Pro / Sony A7IV"/>
+          </div>
+          <div class="form-row">
+            <label for="m_portfolio">Link to at least two pieces of your work <span class="req">*</span></label>
+            <textarea id="m_portfolio" name="portfolio" required placeholder="Google Drive, Instagram, Behance, etc."></textarea>
+          </div>
+          <div class="form-row">
+            <div class="checkbox-row">
+              <input type="checkbox" name="agree_upload" id="agree_upload" required/>
+              <label for="agree_upload">I agree to upload images to Google Drive whenever asked.</label>
+            </div>
+            <div class="checkbox-row">
+              <input type="checkbox" name="agree_move" id="agree_move" required/>
+              <label for="agree_move">I agree to go wherever asked to take pictures/videos.</label>
+            </div>
+          </div>
+          <button type="submit" class="form-submit">Submit Application</button>
+          <div class="form-msg" id="msg-media"></div>
+        </form>
+      </div>
+
+      <!-- VOLUNTEER FORM -->
+      <div class="form-panel" id="panel-volunteer">
+        <form class="apply-form" onsubmit="submitForm(event,'volunteer')">
+          <div class="form-row" style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:1rem;">
+            <div>
+              <label for="v_fname">First Name <span class="req">*</span></label>
+              <input id="v_fname" type="text" name="first_name" required placeholder="First name"/>
+            </div>
+            <div>
+              <label for="v_mname">Middle Name</label>
+              <input id="v_mname" type="text" name="middle_name" placeholder="Middle name"/>
+            </div>
+            <div>
+              <label for="v_lname">Last Name <span class="req">*</span></label>
+              <input id="v_lname" type="text" name="last_name" required placeholder="Last name"/>
+            </div>
+          </div>
+          <div class="form-row">
+            <label for="v_email">Email Address <span class="req">*</span></label>
+            <input id="v_email" type="email" name="email" required placeholder="your@email.com"/>
+          </div>
+          <div class="form-row">
+            <label for="v_phone">Phone Number <span class="req">*</span></label>
+            <input id="v_phone" type="tel" name="phone" required placeholder="+966 5xxxxxxxx"/>
+          </div>
+          <div class="form-row">
+            <label>Have you volunteered or participated in an event before? <span class="req">*</span></label>
+            <div class="yn-group">
+              <div class="yn-option yes">
+                <input type="radio" name="v_prior_yn" id="v_prior_yes" value="Yes" onchange="togglePrior('volunteer', true)" required/>
+                <label for="v_prior_yes">Yes</label>
+              </div>
+              <div class="yn-option no">
+                <input type="radio" name="v_prior_yn" id="v_prior_no" value="No" onchange="togglePrior('volunteer', false)"/>
+                <label for="v_prior_no">No</label>
+              </div>
+            </div>
+          </div>
+          <div id="v_prior_block" style="display:none;">
+            <div class="form-row">
+              <label for="v_experience">Describe your experience <span class="req">*</span></label>
+              <textarea id="v_experience" name="vol_experience" placeholder="Event name, your role, what you did..."></textarea>
+            </div>
+            <div class="form-row">
+              <label for="v_proof">Upload proof of participation <span class="req">*</span></label>
+              <p style="font-size:0.78rem;opacity:0.6;margin-bottom:0.4rem;">Photos, certificates, screenshots — you can select multiple files.</p>
+              <input type="hidden" id="v_proof_url" name="proof_link"/><input id="v_proof" type="hidden" role="uploadcare-uploader" data-multiple="true" data-images-only="false"/><div id="v_proof_preview" style="margin-top:0.4rem;font-size:0.8rem;color:var(--pink-hot);font-weight:600;"></div>
+            </div>
+          </div>
+          <div class="form-row">
+            <label for="v_skills">Relevant skills</label>
+            <textarea id="v_skills" name="skills" placeholder="Any skills we should know about?"></textarea>
+          </div>
+          <div class="form-row">
+            <label>Rate your skills (out of 10)</label>
+            <div class="rating-group"><label>Communication & public speaking</label><input type="number" name="r_comm" min="1" max="10" placeholder="—"/></div>
+            <div class="rating-group"><label>Teamwork & cooperation</label><input type="number" name="r_team" min="1" max="10" placeholder="—"/></div>
+            <div class="rating-group"><label>Organisation & time management</label><input type="number" name="r_org" min="1" max="10" placeholder="—"/></div>
+            <div class="rating-group"><label>Problem solving</label><input type="number" name="r_prob" min="1" max="10" placeholder="—"/></div>
+            <div class="rating-group"><label>Leadership</label><input type="number" name="r_lead" min="1" max="10" placeholder="—"/></div>
+            <div class="rating-group"><label>Creativity</label><input type="number" name="r_cre" min="1" max="10" placeholder="—"/></div>
+          </div>
+          <div class="form-row">
+            <label for="v_reasons">Your reasons for signing up <span class="req">*</span></label>
+            <textarea id="v_reasons" name="reasons" required placeholder="Why do you want to be an admin at Light?"></textarea>
+          </div>
+          <div class="form-row">
+            <label>Scenario responses <span class="req">*</span></label>
+            <p style="font-size:0.82rem;opacity:0.65;margin-bottom:0.5rem;">A visitor asks you a question you don't know the answer to. What do you do?</p>
+            <textarea name="scenario1" required placeholder="Your response..."></textarea>
+          </div>
+          <div class="form-row">
+            <p style="font-size:0.82rem;opacity:0.65;margin-bottom:0.5rem;">You and another volunteer disagree on how to organise an activity. What would you do?</p>
+            <textarea name="scenario2" required placeholder="Your response..."></textarea>
+          </div>
+          <div class="form-row">
+            <p style="font-size:0.82rem;opacity:0.65;margin-bottom:0.5rem;">A student repeatedly ignores instructions and disrupts the activity. What steps would you take?</p>
+            <textarea name="scenario3" required placeholder="Your response..."></textarea>
+          </div>
+          <div class="form-row">
+            <div class="checkbox-row">
+              <input type="checkbox" name="three_days" id="three_days" required/>
+              <label for="three_days">I am willing to dedicate the full 2 days to Light as an admin.</label>
+            </div>
+          </div>
+          <div class="form-row">
+            <label for="v_extra">Anything else you'd like us to know?</label>
+            <textarea id="v_extra" name="extra" placeholder="Optional extra info..."></textarea>
+          </div>
+          <button type="submit" class="form-submit">Submit Application</button>
+          <div class="form-msg" id="msg-volunteer"></div>
+        </form>
+      </div>
+    </div>
+  </section>
+
+  <!-- FEES -->
+  <section id="fees" style="background:var(--white);border-bottom:2px solid var(--black);">
+    <div class="section-inner">
+      <span class="section-label reveal">Participation Fees</span>
+      <h2 class="section-title reveal">What's the cost?</h2>
+      <p style="opacity:0.7;max-width:500px;line-height:1.7;margin-bottom:3rem;" class="reveal">Fees cover the full summit experience across both days. Pick your role and come ready.</p>
+      <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:1.2rem;">
+        <div class="reveal" style="background:var(--lemon);border:2px solid var(--black);border-radius:1.5rem;padding:2rem 1.5rem;text-align:center;">
+          <p style="font-size:0.7rem;font-weight:700;letter-spacing:0.18em;text-transform:uppercase;opacity:0.55;margin-bottom:0.6rem;">Delegate</p>
+          <p style="font-size:3rem;font-weight:900;letter-spacing:-0.04em;line-height:1;">140</p>
+          <p style="font-size:0.8rem;font-weight:600;opacity:0.6;margin-top:0.2rem;">SAR</p>
+        </div>
+        <div class="reveal" style="background:var(--sky);border:2px solid var(--black);border-radius:1.5rem;padding:2rem 1.5rem;text-align:center;">
+          <p style="font-size:0.7rem;font-weight:700;letter-spacing:0.18em;text-transform:uppercase;opacity:0.55;margin-bottom:0.6rem;">Chair</p>
+          <p style="font-size:3rem;font-weight:900;letter-spacing:-0.04em;line-height:1;">120</p>
+          <p style="font-size:0.8rem;font-weight:600;opacity:0.6;margin-top:0.2rem;">SAR</p>
+        </div>
+        <div class="reveal" style="background:var(--pink-soft);border:2px solid var(--black);border-radius:1.5rem;padding:2rem 1.5rem;text-align:center;">
+          <p style="font-size:0.7rem;font-weight:700;letter-spacing:0.18em;text-transform:uppercase;opacity:0.55;margin-bottom:0.6rem;">Media</p>
+          <p style="font-size:3rem;font-weight:900;letter-spacing:-0.04em;line-height:1;">65</p>
+          <p style="font-size:0.8rem;font-weight:600;opacity:0.6;margin-top:0.2rem;">SAR</p>
+        </div>
+        <div class="reveal" style="background:var(--gold);border:2px solid var(--black);border-radius:1.5rem;padding:2rem 1.5rem;text-align:center;">
+          <p style="font-size:0.7rem;font-weight:700;letter-spacing:0.18em;text-transform:uppercase;opacity:0.55;margin-bottom:0.6rem;">Admin</p>
+          <p style="font-size:3rem;font-weight:900;letter-spacing:-0.04em;line-height:1;">45</p>
+          <p style="font-size:0.8rem;font-weight:600;opacity:0.6;margin-top:0.2rem;">SAR</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CONTACT -->
+  <section id="contact">
+    <div class="section-inner">
+      <div class="contact-grid">
+        <div class="contact-info reveal">
+          <span class="section-label">Get in touch</span>
+          <h2 class="section-title">Have questions?</h2>
+          <p>Reach out to us on Instagram or drop us an email — we'll get back to you as fast as we can. The stage is almost ready.</p>
+          <div class="contact-links">
+            <a href="https://www.instagram.com/light.summit26" target="_blank" rel="noopener" class="contact-link">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <rect x="2" y="2" width="20" height="20" rx="5" ry="5"/>
+                <circle cx="12" cy="12" r="4"/>
+                <circle cx="17.5" cy="6.5" r="1" fill="currentColor" stroke="none"/>
+              </svg>
+              @light.summit26
+            </a>
+          </div>
+        </div>
+        <div class="reveal" style="display:flex;align-items:center;justify-content:center;">
+          <div style="text-align:center;">
+            <div style="font-size:clamp(4rem,12vw,8rem);font-weight:900;letter-spacing:-0.05em;line-height:1;color:var(--black);opacity:0.08;user-select:none;">LIGHT.</div>
+            <p style="font-size:0.85rem;font-weight:600;letter-spacing:0.1em;text-transform:uppercase;opacity:0.5;margin-top:0.5rem;">22 — 23 May 2026 · Madinah</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer>
+    <div class="footer-logo">
+      <img src="logo.png" alt="LIGHT." onerror="this.style.display='none'; this.parentNode.innerHTML='LIGHT.'"/>
+    </div>
+    <p>© 2026 Light Summit — Madinah's first independent youth summit.</p>
+    <a href="https://www.instagram.com/light.summit26" target="_blank" rel="noopener" style="opacity:0.45;color:var(--white);font-size:0.75rem;font-weight:600;letter-spacing:0.1em;text-transform:uppercase;text-decoration:none;">@light.summit26</a>
+  </footer>
+
+</div><!-- /#site -->
+
+<script>
+/* ── GOOGLE APPS SCRIPT ENDPOINT ──────────────────────────── */
+const SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbyTKi9TJigK0IzDDYRlJTkFvDgDGkK3IIYHOAqiVr0AZQRELPhFZ35XqXH8xUF1DIPhbQ/exec';
+const UPLOAD_URL = '/.netlify/functions/upload';
+
+/* map form panels to Sheet tab names — update if your tabs are named differently */
+const TAB_NAMES = {
+  delegate: 'Delegates',
+  chair: 'Chairs',
+  media: 'Media',
+  volunteer: 'Admins'
+};
+
+/* ── INTRO ANIMATION ──────────────────────────────────────── */
+(function() {
+  const introEl   = document.getElementById('intro');
+  const phase1    = document.getElementById('intro-phase1');
+  const phase2    = document.getElementById('intro-phase2');
+  const logoWrap  = document.getElementById('intro-logo-wrap');
+  const fakeLogo  = document.getElementById('intro-logo');
+  const siteEl    = document.getElementById('site');
+  const navLogoEl = document.getElementById('nav-logo');
+
+  // 0:00 — show phase 1 (dark grey + text)
+  // 0:02 — fade to black, swap to blurry LIGHT
+  setTimeout(() => {
+    introEl.style.background = '#000000';
+    phase1.style.opacity = '0';
+    setTimeout(() => {
+      phase1.style.display = 'none';
+      phase2.style.opacity = '1';
+    }, 500);
+  }, 2000);
+
+  // 0:03 — snap bg to yellow, unblur logo
+  setTimeout(() => {
+    introEl.style.background = '#FDE94F';
+    logoWrap.classList.add('sharp');
+  }, 3000);
+
+  // 0:05 — fly logo to navbar
+  setTimeout(() => {
+    const wrapRect   = logoWrap.getBoundingClientRect();
+    const navLogoRect = navLogoEl.getBoundingClientRect();
+
+    // clone position for flight
+    fakeLogo.style.display = 'block';
+    fakeLogo.style.position = 'fixed';
+    fakeLogo.style.top    = wrapRect.top + 'px';
+    fakeLogo.style.left   = wrapRect.left + 'px';
+    fakeLogo.style.width  = wrapRect.width + 'px';
+    fakeLogo.style.height = wrapRect.height + 'px';
+    fakeLogo.style.zIndex = '10000';
+    fakeLogo.style.transition = 'all 0.75s cubic-bezier(0.4,0,0.2,1)';
+    fakeLogo.innerHTML = logoWrap.innerHTML;
+
+    phase2.style.opacity = '0';
+    siteEl.classList.add('visible');
+    introEl.style.transition = 'opacity 0.5s ease 0.2s';
+    introEl.style.opacity = '0';
+
+    requestAnimationFrame(() => requestAnimationFrame(() => {
+      const scale = navLogoRect.height / wrapRect.height;
+      fakeLogo.style.top  = navLogoRect.top + 'px';
+      fakeLogo.style.left = navLogoRect.left + 'px';
+      fakeLogo.style.transform = `scale(${scale})`;
+      fakeLogo.style.transformOrigin = 'top left';
+    }));
+
+    setTimeout(() => {
+      introEl.style.display = 'none';
+      fakeLogo.style.display = 'none';
+      navLogoEl.classList.add('visible');
+    }, 1000);
+  }, 5000);
+})();
+
+/* ── PRIOR EXPERIENCE TOGGLE ──────────────────────────────── */
+const rolePrefixMap = { delegate: 'd', chair: 'c', media: 'm', volunteer: 'v' };
+function togglePrior(role, show) {
+  const prefix = rolePrefixMap[role];
+  const block = document.getElementById(prefix + '_prior_block');
+  if (!block) return;
+  block.style.display = show ? 'block' : 'none';
+  block.querySelectorAll('textarea, input[type="url"]').forEach(el => el.required = show);
+}
+
+/* ── COMMITTEE 3-MAX LIMITER ──────────────────────────────── */
+function limitChecks(groupId, max) {
+  const group = document.getElementById(groupId);
+  const boxes = group.querySelectorAll('input[type="checkbox"]');
+  const warn  = document.getElementById(groupId + '_warn');
+  const checked = [...boxes].filter(b => b.checked).length;
+  if (checked >= max) {
+    boxes.forEach(b => { if (!b.checked) b.disabled = true; });
+    if (warn) warn.style.display = 'block';
+  } else {
+    boxes.forEach(b => b.disabled = false);
+    if (warn) warn.style.display = 'none';
+  }
+}
+
+/* ── NAV LOGO DROPDOWN ────────────────────────────────────── */
+function toggleDropdown(e) {
+  e.preventDefault();
+  const dd = document.getElementById('logo-dropdown');
+  dd.classList.toggle('open');
+}
+function closeDropdown() {
+  document.getElementById('logo-dropdown').classList.remove('open');
+}
+document.addEventListener('click', function(e) {
+  if (!e.target.closest('#nav-logo') && !e.target.closest('#logo-dropdown')) {
+    closeDropdown();
+  }
+});
+
+/* ── SCROLL REVEAL ────────────────────────────────────────── */
+const revealEls = document.querySelectorAll('.reveal');
+const observer = new IntersectionObserver((entries) => {
+  entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('in'); observer.unobserve(e.target); }});
+}, { threshold: 0.1, rootMargin: '0px 0px -40px 0px' });
+revealEls.forEach(el => observer.observe(el));
+
+/* ── TAB SWITCH ───────────────────────────────────────────── */
+function switchTab(role, btn) {
+  document.querySelectorAll('.role-tab').forEach(t => t.classList.remove('active'));
+  document.querySelectorAll('.form-panel').forEach(p => p.classList.remove('active'));
+  btn.classList.add('active');
+  document.getElementById('panel-' + role).classList.add('active');
+}
+
+/* ── FORM SUBMISSION ──────────────────────────────────────── */
+async function submitForm(e, role) {
+  e.preventDefault();
+  const form = e.target;
+  const btn  = form.querySelector('.form-submit');
+  const msgEl = document.getElementById('msg-' + role);
+
+  const data = { role: TAB_NAMES[role], sheet: TAB_NAMES[role] };
+  const fd = new FormData(form);
+
+  const allValues = {};
+  fd.forEach((val, key) => {
+    if (key === 'proof') return;
+    if (allValues[key]) { allValues[key] = allValues[key] + ', ' + val; }
+    else { allValues[key] = val; }
+  });
+  Object.assign(data, allValues);
+
+  /* grab uploadcare URL */
+  const prefix = { delegate:'d', chair:'c', media:'m', volunteer:'v' }[role];
+  const ucInput = document.getElementById(prefix + '_proof');
+  if (ucInput && ucInput.value) {
+    data.proof_link = ucInput.value;
+  }
+
+  data.timestamp = new Date().toLocaleString('en-GB', {timeZone:'Asia/Riyadh'});
+  btn.disabled = true;
+  btn.textContent = 'Submitting…';
+  msgEl.style.display = 'none';
+
+  try {
+    await fetch(SCRIPT_URL, {
+      method: 'POST',
+      mode: 'no-cors',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(data)
+    });
+
+    form.reset();
+    const priorBlock = form.querySelector('[id$="_prior_block"]');
+    if (priorBlock) priorBlock.style.display = 'none';
+    form.querySelectorAll('input[type="checkbox"]').forEach(b => b.disabled = false);
+    form.querySelectorAll('[id$="_warn"]').forEach(w => w.style.display = 'none');
+    document.getElementById('successOverlay').classList.add('show');
+  } catch (err) {
+    msgEl.textContent = 'Something went wrong. Please try again or reach out on Instagram.';
+    msgEl.className = 'form-msg error';
+    msgEl.style.display = 'block';
+  }
+
+  btn.disabled = false;
+  btn.textContent = 'Submit Application';
+}
+</script>
+</body>
+</html>
